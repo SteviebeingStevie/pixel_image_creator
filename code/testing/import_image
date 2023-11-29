@@ -1,5 +1,5 @@
 from PIL import Image
-
+from matplotlib import pyplot as plt
 
 def load_image(image_path):
     """
@@ -27,49 +27,42 @@ def information_image(image_object):
     Keyword arguments:
     image_object -- loaded image object
     """
-    # Pfade definieren
-    input_image_path = image_object
-    # Bild einlesen
-    input_image = Image.open(input_image_path)
+
     # Dateiformat abrufen
-    image_format = input_image.format
+    image_format = image_object.format
     # Farbkodierung abrufen
-    image_color_code = input_image.mode
+    image_color_code = image_object.mode
     # Bildmasse erhalten
-    width, height = input_image.size
+    width, height = image_object.size
     return {
         "format" : image_format,
         "color_code" : image_color_code,
         "size [x, y]" : (width, height)
         }
 
-# Informationen ausgeben
-loaded_image = load_image("images/before/Bild2.jpg")
-print(information_image(load_image))
+def show_image(image_object):
+    """
+    Displays an image.
 
+    Keyword arguments:
+    image_object -- loaded image object
+    """
+    plt.imshow(image_object)
+    plt.axis('off')
+    plt.show()
 
-
-"""
-import numpy as np
-import matplotlib.pyplot as plt
-
-def resize_image(image_path, new_width, new_height):
-    # Bild einlesen
-    input_image = Image.open(image_path)
+def resize_image(image_object, new_width, new_height):
     
     # Bildgröße ändern
-    resized_image = input_image.resize((new_width, new_height))
-    
-    return resized_image
-
-def resize_image_same_ratio(image_path, new_width, new_height):
-    input_image = image.open(image_path)
-
-    image_ratio = 
+    return image_object.resize((new_width, new_height))
 
 
-# Beispielaufruf
-resized_image = resize_image('images/before/Bild2.jpg', 33, 47)
-plt.imshow(resized_image)
-plt.axis('off')
-plt.show()"""
+
+# Informationen ausgeben
+loaded_image = load_image("images/before/Bild2.jpg")
+print(information_image(loaded_image))
+resized_image = resize_image(loaded_image, 33, 47)
+
+
+# Bild speichern
+resized_image.save("images/after/Bild2.jpg")
