@@ -57,12 +57,36 @@ def resize_image(image_object, new_width, new_height):
     return image_object.resize((new_width, new_height))
 
 
+# resize image with ratio
+def resize_by_ratio(image_object, resize_percentage):
+    width, height = image_object.size
+    ratio = width / height
+
+    new_width = round(resize_percentage / 100 * width)
+    new_height = round(new_width / ratio)
+    
+    return resize_image(loaded_image, new_width, new_height)
+
+   
+
+
 
 # Informationen ausgeben
-loaded_image = load_image("images/before/Bild2.jpg")
+print("-"*30)
+loaded_image = load_image("images/before/proxy-image.jpeg")
 print(information_image(loaded_image))
-resized_image = resize_image(loaded_image, 33, 47)
 
+
+
+#resized_image = resize_image(loaded_image, 33, 47)
+
+
+resized_image = resize_by_ratio(loaded_image, 5)
+show_image(resized_image)
+
+
+#show_image(resized_image_2)
 
 # Bild speichern
 resized_image.save("images/after/Bild2.jpg")
+print("-"*30)
