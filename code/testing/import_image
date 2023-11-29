@@ -1,0 +1,29 @@
+from PIL import Image
+
+
+def information_image(image_path):
+    """
+    Takes an image as input and returns the Format, Color-Code and the size as a dictionary.
+    
+    Keyword arguments:
+    image_path -- path of the image
+    """
+    # Pfade definieren
+    input_image_path = str(image_path)
+    # Bild einlesen
+    input_image = Image.open(input_image_path)
+    # Dateiformat abrufen
+    image_format = input_image.format
+    # Farbkodierung abrufen
+    image_color_code = input_image.mode
+    # Bildmasse erhalten
+    width, height = input_image.size
+    return {
+        "format" : image_format,
+        "color_code" : image_color_code,
+        "size [x, y]" : (width, height)
+        }
+
+# Informationen ausgeben
+
+print(information_image("images/before/Bild2.jpg"))
