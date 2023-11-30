@@ -19,7 +19,6 @@ def load_image(image_path):
         print(f"Fehler beim Laden des Bildes: {e}")
         return None
 
-
 def information_image(image_object):
     """
     Takes an image as input and returns the Format, Color-Code and the size as a dictionary.
@@ -51,18 +50,34 @@ def show_image(image_object):
     plt.axis('off')
     plt.show()
 
-def resize_image(image_object, new_width, new_height):
+def resize_image(image_object, width, height):
+    """
+    Resize an input image to a certain size.
+
+    Keyword arguments:
+    image_object -- loaded image object
+    width -- new width in pixels
+    height -- new height in pixels
+    """
+    return image_object.resize((width, height))
+
+def resize_by_ratio(image_object, percentage):
+    """
+    Resize an input image by percentage.
+    Examples: 
+        150 % = Upscale by 50 %
+        100 % = same size
+        50 % = Downscale by 50 %
+
+    Keyword arguments:
+    image_object -- loaded image object
+    percentage -- [%] percentage number for scaling image 
+    """
     
-    # Bildgröße ändern
-    return image_object.resize((new_width, new_height))
-
-
-# resize image with ratio
-def resize_by_ratio(image_object, resize_percentage):
     width, height = image_object.size
     ratio = width / height
 
-    new_width = round(resize_percentage / 100 * width)
+    new_width = round(percentage / 100 * width)
     new_height = round(new_width / ratio)
     
     return resize_image(loaded_image, new_width, new_height)
@@ -71,22 +86,7 @@ def resize_by_ratio(image_object, resize_percentage):
 
 
 
-# Informationen ausgeben
-print("-"*30)
-loaded_image = load_image("images/before/proxy-image.jpeg")
-print(information_image(loaded_image))
 
+if __name__ == '__main__':
+    pass
 
-
-#resized_image = resize_image(loaded_image, 33, 47)
-
-
-resized_image = resize_by_ratio(loaded_image, 5)
-show_image(resized_image)
-
-
-#show_image(resized_image_2)
-
-# Bild speichern
-resized_image.save("images/after/Bild2.jpg")
-print("-"*30)
