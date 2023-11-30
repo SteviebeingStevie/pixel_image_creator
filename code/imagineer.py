@@ -1,7 +1,7 @@
 from PIL import Image
 from matplotlib import pyplot as plt
 
-def load_image(image_path):
+def load(image_path):
     """
     Lädt ein Bild von einem Pfad und gibt das Bildobjekt zurück.
     
@@ -19,7 +19,7 @@ def load_image(image_path):
         print(f"Fehler beim Laden des Bildes: {e}")
         return None
 
-def information_image(image_object):
+def information(image_object):
     """
     Takes an image as input and returns the Format, Color-Code and the size as a dictionary.
     
@@ -39,7 +39,7 @@ def information_image(image_object):
         "size [x, y]" : (width, height)
         }
 
-def show_image(image_object):
+def show(image_object):
     """
     Displays an image.
 
@@ -50,7 +50,7 @@ def show_image(image_object):
     plt.axis('off')
     plt.show()
 
-def resize_image(image_object, width, height):
+def resize(image_object, width, height):
     """
     Resize an input image to a certain size.
 
@@ -62,6 +62,9 @@ def resize_image(image_object, width, height):
     return image_object.resize((width, height))
 
 def resize_by_ratio(image_object, percentage):
+
+
+
     """
     Resize an input image by percentage.
     Examples: 
@@ -80,10 +83,7 @@ def resize_by_ratio(image_object, percentage):
     new_width = round(percentage / 100 * width)
     new_height = round(new_width / ratio)
     
-    return resize_image(loaded_image, new_width, new_height)
-
-   
-
+    return resize(image_object, new_width, new_height)
 
 
 
