@@ -88,5 +88,8 @@ def resize_by_ratio(image_object, percentage):
 
 
 if __name__ == '__main__':
-    pass
+    image_object = load("pixel_image_creator/images/before/Bild2.jpg")
+
+    new_image = resize(image_object, 30, 40)
+    show(new_image)
 
